@@ -331,6 +331,163 @@
                 }
             }
         },
+        "/api/loans": {
+            "get": {
+                "tags": [
+                    "Loans"
+                ],
+                "summary": "Lista todos os empréstimos cadastrados na API",
+                "description": "Lista todos os empréstimos cadastrados.",
+                "operationId": "da1da231dd673e1cd157ba27ce4f70c9",
+                "responses": {
+                    "200": {
+                        "description": "Loans list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "example": "1234567890"
+                                            },
+                                            "bookId": {
+                                                "type": "string",
+                                                "example": "1234567890"
+                                            },
+                                            "loanDate": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2024-10-17"
+                                            },
+                                            "dueDate": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2024-10-24"
+                                            },
+                                            "status": {
+                                                "type": "string",
+                                                "example": "Pending"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Requisição com erro"
+                    },
+                    "401": {
+                        "description": "Proibido"
+                    },
+                    "403": {
+                        "description": "Não autorizado"
+                    },
+                    "500": {
+                        "description": "Erro interno"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Loans"
+                ],
+                "summary": "Cria um novo empréstimo na API",
+                "description": "Permite adicionar um novo empréstimo",
+                "operationId": "bf75f8441c0b3e6818b9a5a48f2e512a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "bookId",
+                                    "loanDate",
+                                    "dueDate"
+                                ],
+                                "properties": {
+                                    "bookId": {
+                                        "type": "string",
+                                        "example": "1234567890"
+                                    },
+                                    "loanDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-10-17"
+                                    },
+                                    "dueDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-10-24"
+                                    },
+                                    "returnDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-10-20"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "Pending"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Loan Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "1234567890"
+                                        },
+                                        "bookId": {
+                                            "type": "string",
+                                            "example": "1234567890"
+                                        },
+                                        "loanDate": {
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2024-10-17"
+                                        },
+                                        "dueDate": {
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2024-10-24"
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Pending"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Requisição com erro"
+                    },
+                    "401": {
+                        "description": "Proibido"
+                    },
+                    "403": {
+                        "description": "Não autorizado"
+                    },
+                    "500": {
+                        "description": "Erro interno"
+                    }
+                }
+            }
+        },
         "/health": {
             "get": {
                 "tags": [
@@ -533,6 +690,79 @@
                     }
                 }
             }
+        },
+        "/api/books/{id}/loans": {
+            "get": {
+                "tags": [
+                    "Loans"
+                ],
+                "summary": "Lista todos os empréstimos cadastrados por um determinado livro",
+                "description": "Lista todos os empréstimos cadastrados.",
+                "operationId": "76f0758110a7a19efb63988c973a062e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do livro",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "1234567890"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Loans list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "example": "1234567890"
+                                            },
+                                            "bookId": {
+                                                "type": "string",
+                                                "example": "1234567890"
+                                            },
+                                            "loanDate": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2024-10-17"
+                                            },
+                                            "dueDate": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2024-10-24"
+                                            },
+                                            "status": {
+                                                "type": "string",
+                                                "example": "Pending"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Requisição com erro"
+                    },
+                    "401": {
+                        "description": "Proibido"
+                    },
+                    "403": {
+                        "description": "Não autorizado"
+                    },
+                    "500": {
+                        "description": "Erro interno"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -617,6 +847,10 @@
         {
             "name": "Books",
             "description": "Books"
+        },
+        {
+            "name": "Loans",
+            "description": "Loans"
         },
         {
             "name": "Health Check",
